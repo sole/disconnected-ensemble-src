@@ -21,10 +21,12 @@
   "homepage": "https://github.com/sole/disconnected-ensemble#readme",
   "dependencies": {
     "gulp": "^3.8.11",
+    "gulp-batch": "^1.0.5",
     "gulp-browserify": "^0.5.1",
     "gulp-jshint": "^1.10.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.3",
+    "gulp-watch": "^4.2.4",
     "openmusic-theremin": "^2.0.0",
     "openmusic-theremin-ui": "^1.0.0"
   }

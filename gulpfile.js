@@ -2,13 +2,16 @@
 
 /* global __dirname, require */
 
+var path = require('path');
+var fs = require('fs');
+
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var browserify = require('gulp-browserify');
 var rename = require('gulp-rename');
 var replace = require('gulp-replace');
-var path = require('path');
-var fs = require('fs');
+var watch = require('gulp-watch');
+var batch = require('gulp-batch');
 
 var appDst = path.join(__dirname, 'build/');
 var appSrc = path.join(__dirname, 'src');
@@ -54,8 +57,10 @@ gulp.task('build-www-js', function() {
 		.pipe(gulp.dest(wwwDst));
 });
 
-gulp.task('watch', function() {
-	
-});
-
 gulp.task('default', [ 'build', 'watch' ]);
+
+gulp.task('watch', function () {
+    watch(path.join(appSrc, '**/*'), batch(function() {
+        gulp.start('build');
+    }));
+});

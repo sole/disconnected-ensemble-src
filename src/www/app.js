@@ -39,6 +39,7 @@ function useToy(name, audioConstructor, tagName) {
 	var gain = ac.createGain();
 	gain.gain.value = 0.10;
 
+	// TODO replace this with fancy audio limiter blabla
 	gain.connect(ac.destination);
 	toy.connect(gain);
 
