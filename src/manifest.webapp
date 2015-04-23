@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "name": "disconnected ensemble",
+  "description": "tadaaaa",
+  "launch_path": "/index.html",
+  "icons": {
+    "16": "/img/icons/icon16x16.png",
+    "48": "/img/icons/icon48x48.png",
+    "60": "/img/icons/icon60x60.png",
+    "128": "/img/icons/icon128x128.png",
+  },
+  "developer": {
+    "name": "sole",
+    "url": "http://soledadpenades.com"
+  },
+  "type": "certified",
+  "permissions": {
+    "wifi-manage": {
+      "description": "show current ip etc"
+    },
+  "tcp-socket": {},
+    "udp-socket": {},
+  "nfc": {}
+  },
+  "installs_allowed_from": [
+    "*"
+  ]
+}

@@ -1,6 +1,6 @@
 'use strict';
 
-/* global require */
+/* global __dirname, require */
 
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
@@ -10,8 +10,10 @@ var replace = require('gulp-replace');
 var path = require('path');
 var fs = require('fs');
 
-var appPath = path.join(__dirname, 'build/');
+var appDst = path.join(__dirname, 'build/');
 var appSrc = path.join(__dirname, 'src');
+var wwwSrc = path.join(appSrc, 'www');
+var wwwDst = path.join(appDst, 'www');
 
 gulp.task('lint', function() {
   return gulp.src('src/js/**/*.js')
@@ -30,10 +32,10 @@ gulp.task('build-app-static', function() {
 	], {
 		base: appSrc
 	})
-		.pipe(gulp.dest(appPath));
+		.pipe(gulp.dest(appDst));
 });
 
-gulp.task('build-www', ['build-www-static'] );
+gulp.task('build-www', ['build-www-static', 'build-www-js'] );
 
 gulp.task('build-www-static', function() {
 	return gulp.src([
@@ -41,7 +43,12 @@ gulp.task('build-www-static', function() {
 		], {
 			base: path.join(appSrc, 'www')
 		})
-		.pipe(gulp.dest(path.join(appPath, 'www')));
+		.pipe(gulp.dest(wwwDst));
 });
 
-
+gulp.task('build-www-js', function() {
+	return gulp.src(path.join(wwwSrc, 'app.js'))
+		.pipe(browserify())
+		.pipe(rename('bundle.js'))
+		.pipe(gulp.dest(wwwDst));
+});
