@@ -151,7 +151,7 @@ function getContentType(filePath) {
 	var extToType = {
 		'gif': 'image/gif',
 		'jpg': 'image/jpg',
-		'css': 'text/stylesheet',
+		'css': 'text/css',
 		'js': 'text/javascript',
 		'html': 'text/html'
 	};
