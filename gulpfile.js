@@ -39,7 +39,8 @@ gulp.task('build-www', ['build-www-static', 'build-www-js'] );
 
 gulp.task('build-www-static', function() {
 	return gulp.src([
-			path.join(appSrc, 'www/index.html')
+			path.join(appSrc, 'www/index.html'),
+			path.join(appSrc, 'www/style.css')
 		], {
 			base: path.join(appSrc, 'www')
 		})
@@ -52,3 +53,9 @@ gulp.task('build-www-js', function() {
 		.pipe(rename('bundle.js'))
 		.pipe(gulp.dest(wwwDst));
 });
+
+gulp.task('watch', function() {
+	
+});
+
+gulp.task('default', [ 'build', 'watch' ]);
