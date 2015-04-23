@@ -24,6 +24,8 @@
     "gulp-browserify": "^0.5.1",
     "gulp-jshint": "^1.10.0",
     "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.5.3"
+    "gulp-replace": "^0.5.3",
+    "openmusic-theremin": "^2.0.0",
+    "openmusic-theremin-ui": "^1.0.0"
   }
 }
