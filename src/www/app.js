@@ -1,5 +1,8 @@
 // FRONT-END APP //
 
+// polyfilling just in case
+require('webcomponents-lite');
+
 var mainElement;
 
 var toys = [

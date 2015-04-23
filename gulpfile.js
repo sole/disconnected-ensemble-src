@@ -26,16 +26,25 @@ gulp.task('lint', function() {
 
 gulp.task('build', ['build-app', 'build-www']);
 
-gulp.task('build-app', ['build-app-static']);
+gulp.task('build-app', ['build-app-static', 'build-app-js']);
 
 gulp.task('build-app-static', function() {
 	return gulp.src([
 		path.join(appSrc, 'manifest.webapp'),
-		path.join(appSrc, 'img/**/*')
+		path.join(appSrc, 'index.html'),
+		path.join(appSrc, 'img/**/*'),
+		path.join(appSrc, 'css/**/*')
 	], {
 		base: appSrc
 	})
 		.pipe(gulp.dest(appDst));
+});
+
+gulp.task('build-app-js', function() {
+	return gulp.src(path.join(appSrc, 'server.js'))
+		.pipe(browserify())
+		.pipe(rename('bundle.js'))
+		.pipe(gulp.dest(path.join(appDst, 'js')));
 });
 
 gulp.task('build-www', ['build-www-static', 'build-www-js'] );
