@@ -20,3 +20,7 @@ main > button {
 	display: block;
 	margin-bottom: 1rem;
 }
+
+input {
+	font-size: inherit;
+}
