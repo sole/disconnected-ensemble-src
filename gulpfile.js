@@ -69,7 +69,7 @@ gulp.task('build-www-js', function() {
 gulp.task('default', [ 'build', 'watch' ]);
 
 gulp.task('watch', function () {
-    watch(path.join(appSrc, '**/*'), batch(function() {
+    watch(path.join(appSrc, '**/**/*'), batch(function() {
         gulp.start('build');
     }));
 });
