@@ -21,6 +21,38 @@ main > button {
 	margin-bottom: 1rem;
 }
 
-input {
+button, input {
 	font-size: inherit;
+}
+
+
+openmusic-drum-machine-ui {
+	display: block;
+	border: 1px solid white;
+	margin: 1rem 0;
+	transform: rotate(90deg) translate(0, -100%);
+	transform-origin: top left;
+}
+
+openmusic-drum-machine-ui table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+openmusic-drum-machine-ui tr {
+	display: flex;
+	flex-direction: row;
+  justify-content: space-between;
+}
+
+openmusic-drum-machine-ui table td {
+	display: inline;
+	background: red;
+	line-height: 1;
+	border-collapse: collapse;
+}
+
+openmusic-drum-machine-ui input[type=checkbox] {
+	xwidth: 1.1rem;
+	margin: 0;
 }

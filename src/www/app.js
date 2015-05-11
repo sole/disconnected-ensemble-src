@@ -64,8 +64,6 @@ function useToy(name, audioConstructor, tagName, withTransport) {
 		toyUI.attachTo(toy);
 	}
 
-	mainElement.appendChild(toyUI);
-
 	if(withTransport) {
 		var transport = document.createElement('openmusic-transport');
 		mainElement.appendChild(transport);
@@ -83,4 +81,6 @@ function useToy(name, audioConstructor, tagName, withTransport) {
 		});
 	}
 	
+	mainElement.appendChild(toyUI);
+
 }
