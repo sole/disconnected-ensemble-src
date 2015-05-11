@@ -11,6 +11,12 @@ var toys = [
 		webComponent: require('openmusic-theremin-ui'),
 		tag: 'openmusic-theremin-ui',
 		name: 'Theremin'
+	},
+	{
+		audioConstructor: require('openmusic-drum-machine'),
+		webComponent: require('openmusic-drum-machine-ui'),
+		tag: 'openmusic-drum-machine-ui',
+		name: 'Drum Machine'
 	}
 ];
 
@@ -39,17 +45,22 @@ function useToy(name, audioConstructor, tagName) {
 
 	var ac = new AudioContext();
 	var toy = audioConstructor(ac);
-	var gain = ac.createGain();
-	// gain.gain.value = 0.10;
+	var limiter = ac.createDynamicsCompressor();
 
-	// TODO replace this with fancy audio limiter blabla
-	gain.connect(ac.destination);
-	toy.connect(gain);
+	limiter.connect(ac.destination);
+	toy.connect(limiter);
 
 	mainElement.innerHTML = '<h1>' + name + '</h1>';
 	var toyUI = document.createElement(tagName);
 
-	toyUI.attachTo(toy);
+	// TODO perhaps change it so all instruments have a ready() method instead
+	if(toy.ready !== undefined) {
+		toy.ready().then(function() {
+			toyUI.attachTo(toy);
+		});
+	} else {
+		toyUI.attachTo(toy);
+	}
 
 	mainElement.appendChild(toyUI);
 	

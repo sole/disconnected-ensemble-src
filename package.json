@@ -29,6 +29,8 @@
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.3",
     "gulp-watch": "^4.2.4",
+    "openmusic-drum-machine": "^1.0.0",
+    "openmusic-drum-machine-ui": "^1.0.0",
     "openmusic-theremin": "^2.1.0",
     "openmusic-theremin-ui": "^2.3.0",
     "webcomponents-lite": "^0.6.0"
