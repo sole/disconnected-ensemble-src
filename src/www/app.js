@@ -17,7 +17,8 @@ var toys = [
 		audioConstructor: require('openmusic-drum-machine'),
 		webComponent: require('openmusic-drum-machine-ui'),
 		tag: 'openmusic-drum-machine-ui',
-		name: 'Drum Machine'
+		name: 'Drum Machine',
+		transport: true
 	}
 ];
 
@@ -34,7 +35,7 @@ function init() {
 		var button = document.createElement('button');
 		button.innerHTML = toy.name;
 		button.addEventListener('click', function() {
-			useToy(toy.name, toy.audioConstructor, toy.tag);
+			useToy(toy.name, toy.audioConstructor, toy.tag, toy.transport);
 		});
 		toy.webComponent.register(toy.tag);
 		mainElement.appendChild(button);
@@ -42,7 +43,7 @@ function init() {
 
 }
 
-function useToy(name, audioConstructor, tagName) {
+function useToy(name, audioConstructor, tagName, withTransport) {
 
 	var ac = new AudioContext();
 	var toy = audioConstructor(ac);
@@ -65,7 +66,21 @@ function useToy(name, audioConstructor, tagName) {
 
 	mainElement.appendChild(toyUI);
 
-	var transport = document.createElement('openmusic-transport');
-//	mainElement.appendChild(transport);
+	if(withTransport) {
+		var transport = document.createElement('openmusic-transport');
+		mainElement.appendChild(transport);
+
+		transport.addEventListener('play', function() {
+			toy.start();
+		});
+
+		transport.addEventListener('stop', function() {
+			toy.stop();
+		});
+
+		transport.addEventListener('bpm', function(ev) {
+			toy.bpm = ev.detail.value;
+		});
+	}
 	
 }
