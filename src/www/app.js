@@ -2,6 +2,7 @@
 
 // polyfilling just in case
 require('webcomponents-lite');
+require('openmusic-transport').register('openmusic-transport');
 
 var mainElement;
 
@@ -63,5 +64,8 @@ function useToy(name, audioConstructor, tagName) {
 	}
 
 	mainElement.appendChild(toyUI);
+
+	var transport = document.createElement('openmusic-transport');
+//	mainElement.appendChild(transport);
 	
 }
