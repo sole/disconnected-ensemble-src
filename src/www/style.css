@@ -13,6 +13,7 @@ body {
 	color: #fff;
 	padding: 1rem;
 	margin: 0;
+	position: fixed;
 }
 
 main > button {
@@ -27,8 +28,7 @@ button, input {
 
 
 openmusic-drum-machine-ui {
-	display: block;
-	border: 1px solid white;
+	display: inline-block;
 	margin: 1rem 0;
 	transform: rotate(90deg) translate(0, -100%);
 	transform-origin: top left;
@@ -42,17 +42,22 @@ openmusic-drum-machine-ui table {
 openmusic-drum-machine-ui tr {
 	display: flex;
 	flex-direction: row;
-  justify-content: space-between;
+	justify-content: space-between;
 }
 
 openmusic-drum-machine-ui table td {
 	display: inline;
-	background: red;
 	line-height: 1;
+	padding: 1px;
 	border-collapse: collapse;
 }
 
 openmusic-drum-machine-ui input[type=checkbox] {
-	xwidth: 1.1rem;
-	margin: 0;
+	height: 3rem;
+	width: 1.3rem;
 }
+
+openmusic-drum-machine-ui .highlight {
+	background: #ff0;
+}
+
