@@ -1,11 +1,18 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 html, body {
   margin: 0;
-  padding: 0.5rem;
+  height: 100%;
 }
 
 body {
   font-size: 1rem;
   background: #fff;
+  padding: 0.5rem;
 }
 
 h1, h2 {
@@ -29,6 +36,22 @@ ul {
 
 input, button {
   font-size: inherit;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+header {
+  
+}
+
+section {
+  height: 100%;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .message {
