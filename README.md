@@ -32,6 +32,12 @@ or using the Web IDE, by importing the `build` directory as a *new packaged app*
 
 While the simulator is convenient for developing, it's way more fun to run this server on a device that you can carry around!
 
+### Rebuilding on file changes
+
+If you run `npm run build`, the app will be built into `build/` and exit.
+
+If you run `npm run gulp`, the app will be built and a file watcher will keep looking for changes. Every time you make a change to a file, the build process will be run.
+
 ## Code walkthrough (or: how to modify this)
 
 This app can be divided in two: the Firefox OS app itself, which runs on the *server* device, and the app that we deliver to *client* devices.
