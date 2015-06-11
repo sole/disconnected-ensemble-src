@@ -17,18 +17,20 @@ var webServer;
 require('./lib/NDEFHelper.js');
 
 const WWW = 'www';
+const DEFAULT_WEB_PORT = 8080;
 var myIP = false;
+var myPort;
 var switchActive = document.getElementById('switchActive');
 var divInfo = document.getElementById('info');
 var divMessages = document.getElementById('messages');
 var webServerStatus = document.getElementById('webServerStatus');
+var webServerPort = document.getElementById('webServerPort');
 
 window.addEventListener('load', init);
 
 function init() {
 	setupUI();
 	displayNetworkInfo();
-	setupWebServer();
 	startWebServer();
 	setupNFCServer();
 }
@@ -55,6 +57,8 @@ function setupUI() {
 		}
 
 	});
+
+	webServerPort.value = DEFAULT_WEB_PORT;
 }
 
 function displayNetworkInfo() {
@@ -70,7 +74,17 @@ function displayNetworkInfo() {
 
 function setupWebServer() {
 
-	webServer = new HTTPServer(80);
+	var port = webServerPort.value;
+
+	if(!port) {
+		port = DEFAULT_WEB_PORT;
+	} else {
+		port = port * 1;
+	}
+
+	myPort = port;
+
+	webServer = new HTTPServer(port);
 
 	webServer.addEventListener('request', function(evt) {
 		var request = evt.request;
@@ -123,10 +137,15 @@ function setupWebServer() {
 
 
 function startWebServer() {
+	if(webServer) {
+		webServer.stop();
+	}
+	setupWebServer();
 	webServer.start();
 	webServerStatus.textContent = 'started';
 	switchActive.checked = true;
-	log('server started in port ' + webServer.port);
+	webServerPort.disabled = true;
+	log('server url: ' + getMyURL());
 }
 
 
@@ -134,7 +153,13 @@ function stopWebServer() {
 	webServer.stop();
 	webServerStatus.textContent = 'stopped';
 	switchActive.checked = false;
+	webServerPort.disabled = false;
 	log('server stopped');
+}
+
+
+function getMyURL() {
+	return 'http://' + myIP + ':' + myPort;
 }
 
 
@@ -171,7 +196,7 @@ function onNFCPeerFound(e) {
 	console.log('NFC PEER!!!', e.peer);
 
 	var peer = e.peer;
-	var url = 'http://' + myIP;
+	var url = getMyURL(); 
 	var ndefHelper = new NDEFHelper();
 	var record = ndefHelper.createURI(url);
 
