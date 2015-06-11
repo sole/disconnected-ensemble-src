@@ -18,12 +18,11 @@ require('./lib/NDEFHelper.js');
 
 const WWW = 'www';
 const DEFAULT_WEB_PORT = 8080;
-var myIP = false;
+var myIP = '0.0.0.0';
 var myPort;
 var switchActive = document.getElementById('switchActive');
 var divInfo = document.getElementById('info');
 var divMessages = document.getElementById('messages');
-var webServerStatus = document.getElementById('webServerStatus');
 var webServerPort = document.getElementById('webServerPort');
 
 window.addEventListener('load', init);
@@ -148,7 +147,6 @@ function startWebServer() {
 	}
 	setupWebServer();
 	webServer.start();
-	webServerStatus.textContent = 'started';
 	switchActive.checked = true;
 	webServerPort.disabled = true;
 	log('server url at ' + getMyURL());
@@ -157,7 +155,6 @@ function startWebServer() {
 
 function stopWebServer() {
 	webServer.stop();
-	webServerStatus.textContent = 'stopped';
 	switchActive.checked = false;
 	webServerPort.disabled = false;
 	log('server stopped');
