@@ -5,8 +5,12 @@
 
 /* global window, require, document */
 
+// Web components
+require('gaia-switch');
+
 var HTTPServer = require('fxos-web-server');
 var getNetworkInfo = require('get-network-info');
+var webServer;
 
 // TODO: URGH this is registering things in window but I have no time to
 // change it now.
@@ -14,15 +18,43 @@ require('./lib/NDEFHelper.js');
 
 const WWW = 'www';
 var myIP = false;
+var switchActive = document.getElementById('switchActive');
 var divInfo = document.getElementById('info');
 var divMessages = document.getElementById('messages');
+var webServerStatus = document.getElementById('webServerStatus');
 
 window.addEventListener('load', init);
 
 function init() {
+	setupUI();
 	displayNetworkInfo();
 	setupWebServer();
+	startWebServer();
 	setupNFCServer();
+}
+
+function setupUI() {
+	switchActive.addEventListener('change', function(e) {
+		console.log(e);
+
+		var checked = switchActive.checked;
+		
+		if(!webServer) {
+			return;
+		}
+
+		// don't really do anything if there's no change
+		if(webServer.running === checked) {
+			return;
+		}
+
+		if(checked) {
+			startWebServer();
+		} else {
+			stopWebServer();
+		}
+
+	});
 }
 
 function displayNetworkInfo() {
@@ -38,9 +70,9 @@ function displayNetworkInfo() {
 
 function setupWebServer() {
 
-	var server = new HTTPServer(80);
+	webServer = new HTTPServer(80);
 
-	server.addEventListener('request', function(evt) {
+	webServer.addEventListener('request', function(evt) {
 		var request = evt.request;
 		var response = evt.response;
 
@@ -83,15 +115,26 @@ function setupWebServer() {
 		
 	});
 
-	server.start(); // TODO is this sync? do we get errors returned?
-
-	log('server up? ' + server.running);
-
 	window.addEventListener('beforeunload', function() {
-		console.log('STOPPING WWW SERVER');
-		server.stop();
+		stopWebServer();
 	});
 
+}
+
+
+function startWebServer() {
+	webServer.start();
+	webServerStatus.textContent = 'started';
+	switchActive.checked = true;
+	log('server started in port ' + webServer.port);
+}
+
+
+function stopWebServer() {
+	webServer.stop();
+	webServerStatus.textContent = 'stopped';
+	switchActive.checked = false;
+	log('server stopped');
 }
 
 

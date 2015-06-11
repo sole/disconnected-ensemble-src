@@ -12,6 +12,10 @@ h1, h2 {
   margin: 0 0 1rem 0;
 }
 
+h1 {
+  font-size: 1.5rem;
+}
+
 h2 {
   font-size: 1.25rem;
   margin: 0.5rem 0;
@@ -23,6 +27,14 @@ ul {
   list-style-position: inside;
 }
 
+input, button {
+  font-size: inherit;
+}
+
 .message {
   font-size: 3rem;
+}
+
+#webServerStatus {
+	text-transform: uppercase;
 }

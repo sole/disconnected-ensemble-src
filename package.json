@@ -4,6 +4,7 @@
   "description": "an experiment",
   "main": "src/server.js",
   "scripts": {
+    "build": "gulp build",
     "gulp": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,6 +23,7 @@
   "homepage": "https://github.com/sole/disconnected-ensemble#readme",
   "dependencies": {
     "fxos-web-server": "git+https://github.com/sole/fxos-web-server.git",
+    "gaia-switch": "gaia-components/gaia-switch",
     "get-network-info": "^2.0.0",
     "gulp": "^3.8.11",
     "gulp-batch": "^1.0.5",
