@@ -31,13 +31,12 @@ window.addEventListener('load', init);
 function init() {
 	setupUI();
 	displayNetworkInfo();
-	startWebServer();
-	setupNFCServer();
+	startServers();
 }
 
 function setupUI() {
+	
 	switchActive.addEventListener('change', function(e) {
-		console.log(e);
 
 		var checked = switchActive.checked;
 		
@@ -51,9 +50,9 @@ function setupUI() {
 		}
 
 		if(checked) {
-			startWebServer();
+			startServers();
 		} else {
-			stopWebServer();
+			stopServers();
 		}
 
 	});
@@ -69,6 +68,20 @@ function displayNetworkInfo() {
 	} else {
 		divInfo.innerHTML = 'UH OH';
 	}
+}
+
+
+function startServers() {
+	startWebServer();
+	startNFCServer();
+	window.addEventListener('beforeunload', stopServers);
+}
+
+
+function stopServers() {
+	stopWebServer();
+	stopNFCServer();
+	window.removeEventListener('beforeunload', stopServers);
 }
 
 
@@ -113,8 +126,6 @@ function setupWebServer() {
 
 		} 
 
-		// TODO how to detect if the file doesn't exist & return 404?
-
 		var t0;
 		log('will send ' + fileToSend);
 		response.addEventListener('complete', function(e) {
@@ -125,14 +136,9 @@ function setupWebServer() {
 
 		response.headers['Content-Type'] = getContentType(fileToSend);
 		t0 = Date.now();
-		response.sendFile(fileToSend); // how to detect if the file doesn't exist & return 404?
+		response.sendFile(fileToSend); // TODO how to detect if the file doesn't exist & return 404?
 		
 	});
-
-	window.addEventListener('beforeunload', function() {
-		stopWebServer();
-	});
-
 }
 
 
@@ -145,7 +151,7 @@ function startWebServer() {
 	webServerStatus.textContent = 'started';
 	switchActive.checked = true;
 	webServerPort.disabled = true;
-	log('server url: ' + getMyURL());
+	log('server url at ' + getMyURL());
 }
 
 
@@ -163,7 +169,7 @@ function getMyURL() {
 }
 
 
-function setupNFCServer() {
+function startNFCServer() {
 
 	var mozNfc = window.navigator.mozNfc;// TODO change var name
 
@@ -179,10 +185,6 @@ function setupNFCServer() {
 
 	mozNfc.onpeerfound = onNFCPeerFound;
 
-	window.addEventListener('beforeunload', function() {
-		console.log('STOPPING NFC SERVER');
-		stopNFCServer();
-	});
 }
 
 function stopNFCServer() {
