@@ -2,6 +2,19 @@
 
 > An app for Firefox OS that lets you share a number of musical toys that can run in your friends' devices, served from your phone, either by typing in the IP address of the phone server, or by bumping NFC devices together.
 
+## System requirements
+
+### Server
+
+* Installs via ADB / Devtools should be enabled: Settings - Developer - Debugging via USB: ADB and DevTools
+* Should have access to 'full DevTools' in order to install certified apps
+
+### Client
+
+* Any modern browser that can run Web Audio code
+* Safari Mobile seems to not to work
+* For NFC capabilities, an NFC capable device *with NFC enabled*.
+
 ## How to run it
 
 Install node.js, which will also install npm with it (the package manager).
