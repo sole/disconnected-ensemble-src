@@ -95,10 +95,13 @@ section {
   overflow-y: auto;
 }
 
-.message {
-  font-size: 3rem;
+#settings {
+  margin: 1rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #999;
 }
 
-#webServerStatus {
-	text-transform: uppercase;
+#messages {
+  font-family: monospace;
+  font-size: 0.8rem;
 }
