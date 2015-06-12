@@ -6,13 +6,13 @@
 
 ### Server
 
-* Installs via ADB / Devtools should be enabled: Settings - Developer - Debugging via USB: ADB and DevTools
-* Should have access to 'full DevTools' in order to install certified apps
+* Installation of apps via ADB / Devtools should be enabled: go to *Settings - Developer - Debugging via USB* and make sure the value is 'ADB and DevTools'.
+* The phone should have access to 'full DevTools' in order to install certified apps.
 
 ### Client
 
 * Any modern browser that can run Web Audio code
-* Safari Mobile seems to not to work
+  * (but Safari Mobile seems to not to work)
 * For NFC capabilities, an NFC capable device *with NFC enabled*.
 
 ## How to run it
