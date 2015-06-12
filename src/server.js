@@ -21,7 +21,9 @@ const DEFAULT_WEB_PORT = 8080;
 var myIP = '0.0.0.0';
 var myPort;
 var switchActive = document.getElementById('switchActive');
-var divInfo = document.getElementById('info');
+var networkInfo = document.getElementById('networkInfo');
+var networkName = document.getElementById('networkName');
+var networkAddress = document.getElementById('networkAddress');
 var divMessages = document.getElementById('messages');
 var webServerPort = document.getElementById('webServerPort');
 
@@ -29,8 +31,16 @@ window.addEventListener('load', init);
 
 function init() {
 	setupUI();
-	displayNetworkInfo();
-	startServers();
+	var netInfo = getNetworkInfo();
+
+	if(netInfo && netInfo.status === 'connected') {
+		myIP = netInfo.ip;
+		displayNetworkInfo(netInfo);
+		startServers();
+	} else {
+		// TODO maybe use alert component 8-)
+		log('This device is not connected to any network.<br />Make sure it is, so we can actually serve some content! ;-)');
+	}
 }
 
 function setupUI() {
@@ -59,14 +69,10 @@ function setupUI() {
 	webServerPort.value = DEFAULT_WEB_PORT;
 }
 
-function displayNetworkInfo() {
-	var info = getNetworkInfo();
-	if(info) {
-		myIP = info.ip;
-		divInfo.innerHTML = `${info.networkName} - <strong>${myIP}</strong>`;
-	} else {
-		divInfo.innerHTML = 'UH OH';
-	}
+function displayNetworkInfo(info) {
+	networkInfo.removeAttribute('hidden');
+	networkName.textContent = info.networkName;
+	networkAddress.textContent = info.ip;
 }
 
 
@@ -148,7 +154,8 @@ function startWebServer() {
 	setupWebServer();
 	webServer.start();
 	switchActive.checked = true;
-	webServerPort.disabled = true;
+	// Using setAttribute instead of just the .disabled property so we can use [disabled] on the stylesheet
+	webServerPort.setAttribute('disabled', 'disabled');
 	log('server url at ' + getMyURL());
 }
 
@@ -156,7 +163,7 @@ function startWebServer() {
 function stopWebServer() {
 	webServer.stop();
 	switchActive.checked = false;
-	webServerPort.disabled = false;
+	webServerPort.removeAttribute('disabled');
 	log('server stopped');
 }
 

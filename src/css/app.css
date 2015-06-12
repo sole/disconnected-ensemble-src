@@ -17,6 +17,8 @@ html, body {
   height: 100%;
 }
 
+*[hidden] { display: none; }
+
 body {
   font-size: 1rem;
   background: #fff;
@@ -43,6 +45,29 @@ ul {
   margin: 0.5rem 0;
   padding: 0;
   list-style-position: inside;
+}
+
+label {
+  display: block;
+  font-family: 'Fjalla One';
+}
+
+label input {
+  border: none;
+  border-bottom: 1px solid #999;
+  border-radius: 0px;
+  background: #fff;
+  color: #000;
+  transition: all 0.3s ease-in;
+}
+
+label input[disabled] {
+  background: #eee;
+  color: #333;
+}
+
+label span {
+  color: #999;
 }
 
 input, button {

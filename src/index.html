@@ -19,8 +19,10 @@
 			<header>
 				<h1>the <strong>disconnected ensemble</strong> <gaia-switch id="switchActive"></gaia-switch></h1>
 				<label>Port <input type="number" id="webServerPort" /></label>
-				<h2>Network</h2>
-				<div id="info"></div>
+				<div id="networkInfo" hidden>
+					<label>Network <span id="networkName"></span></label>
+					<label>IP Address <span id="networkAddress"></span></label>
+				</div>
 				<h2>Activity</h2>
 			</header>
 			<section>
