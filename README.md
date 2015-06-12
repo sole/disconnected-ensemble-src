@@ -9,6 +9,8 @@
 * Installation of apps via ADB / Devtools should be enabled: go to *Settings - Developer - Debugging via USB* and make sure the value is 'ADB and DevTools'.
 * The phone should have access to 'full DevTools' in order to install certified apps.
 
+**NOTE: Why is this app *certified*?** to be able to access information about the current network connection. This is only made available to certified apps right now.
+
 ### Client
 
 * Any modern browser that can run Web Audio code
